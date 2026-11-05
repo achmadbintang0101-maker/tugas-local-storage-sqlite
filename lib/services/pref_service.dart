@@ -5,8 +5,9 @@ class PrefService {
 
   PrefService._(this._prefs);
 
-  // Kunci penyimpanan untuk counter
+  // Kunci penyimpanan
   static const _kOpenCount = 'open_count';
+  static const _kDarkMode = 'is_dark_mode'; // Ditambahkan untuk tema
 
   /// Dipanggil sekali saat aplikasi mulai
   static Future<PrefService> init() async {
@@ -14,10 +15,12 @@ class PrefService {
     return PrefService._(prefs);
   }
 
-  // Getter untuk mengambil jumlah buka aplikasi (default 0 jika belum ada)
+  // Penghitung buka aplikasi
   int get openCount => _prefs.getInt(_kOpenCount) ?? 0;
-
-  // Fungsi untuk menambah hitungan buka aplikasi
   Future<void> increaseOpenCount() =>
       _prefs.setInt(_kOpenCount, openCount + 1);
+
+  // Pengaturan tema gelap
+  bool get isDarkMode => _prefs.getBool(_kDarkMode) ?? false;
+  Future<void> setDarkMode(bool value) => _prefs.setBool(_kDarkMode, value);
 }

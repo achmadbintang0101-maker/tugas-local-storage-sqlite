@@ -4,8 +4,15 @@ import '../services/pref_service.dart';
 
 class ProfilePage extends StatelessWidget {
   final PrefService prefs;
+  final bool isDark;
+  final ValueChanged<bool> onThemeChanged;
 
-  const ProfilePage({super.key, required this.prefs});
+  const ProfilePage({
+    super.key,
+    required this.prefs,
+    required this.isDark,
+    required this.onThemeChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +50,14 @@ class ProfilePage extends StatelessWidget {
                   Text(
                     profile.bio,
                     textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+                  // Widget Switch Mode Gelap
+                  SwitchListTile(
+                    secondary: const Icon(Icons.dark_mode),
+                    title: const Text('Mode Gelap'),
+                    value: isDark,
+                    onChanged: onThemeChanged,
                   ),
                   const SizedBox(height: 24),
                   Center(
