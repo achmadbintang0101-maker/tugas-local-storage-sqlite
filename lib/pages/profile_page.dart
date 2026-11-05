@@ -43,6 +43,16 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  // Fungsi untuk reset profil ke default bawaan
+  Future<void> _reset() async {
+    await widget.prefs.clearProfile();
+    if (!mounted) return;
+    setState(() => _profile = widget.prefs.profile);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Profil dikembalikan ke bawaan')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
@@ -72,6 +82,13 @@ class _ProfilePageState extends State<ProfilePage> {
                       _profile.name.isNotEmpty ? _profile.name[0] : '?',
                       style: const TextStyle(fontSize: 32),
                     ),
+                  ),
+                  const SizedBox(height: 12),
+                  // Tombol Reset Profil
+                  OutlinedButton.icon(
+                    onPressed: _reset,
+                    icon: const Icon(Icons.restore),
+                    label: const Text('Reset Profil'),
                   ),
                   const SizedBox(height: 16),
                   Text(

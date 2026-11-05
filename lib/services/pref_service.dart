@@ -6,6 +6,9 @@ class PrefService {
 
   PrefService._(this._prefs);
 
+  // Getter untuk debugging daftar key yang tersimpan
+  Set<String> get debugKeys => _prefs.getKeys();
+
   static const _kOpenCount = 'open_count';
   static const _kDarkMode = 'is_dark_mode';
   static const _kProfile = 'profile_data'; // Ditambahkan untuk data profil
