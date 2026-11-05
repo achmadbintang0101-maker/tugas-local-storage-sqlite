@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import '../models/profile_data.dart';
+import '../services/pref_service.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final PrefService prefs;
+
+  const ProfilePage({super.key, required this.prefs});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +43,13 @@ class ProfilePage extends StatelessWidget {
                   Text(
                     profile.bio,
                     textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  Center(
+                    child: Text(
+                      'Kartu ini sudah dibuka ${prefs.openCount} kali',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
                 ],
               ),
